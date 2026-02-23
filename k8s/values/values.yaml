@@ -1,5 +1,5 @@
 global:
-  domain: climate-platform.alice-platform.com
+  domain: climate-platform.alicelaw.net
 frontend:
   replicas: 2
   image: climate-platform/frontend:latest
