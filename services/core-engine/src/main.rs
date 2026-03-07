@@ -155,7 +155,7 @@ async fn query(State(s): State<Arc<AppState>>, Json(req): Json<QueryRequest>) ->
     };
 
     // Cloud cover: derived from humidity
-    let cloud_cover_pct = (humidity_pct - 30.0).max(0.0).min(100.0);
+    let cloud_cover_pct = (humidity_pct - 30.0).clamp(0.0, 100.0);
 
     // Precipitation: based on humidity and temperature
     let precip_factor = if temperature_c > 0.0 && humidity_pct > 60.0 {
@@ -222,7 +222,7 @@ async fn anomaly_detect(State(s): State<Arc<AppState>>, Json(req): Json<AnomalyR
     let lon_range = req.region.lon_max - req.region.lon_min;
 
     // Generate realistic anomalies based on region size
-    let anomaly_count = ((lat_range * lon_range / 1000.0).sqrt() as usize).max(3).min(20);
+    let anomaly_count = ((lat_range * lon_range / 1000.0).sqrt() as usize).clamp(3, 20);
     let mut anomalies = Vec::with_capacity(anomaly_count);
 
     let types = ["heat_wave", "cold_snap", "pressure_anomaly", "humidity_spike", "wind_shear"];
