@@ -66,7 +66,7 @@ export default function ConsolePage() {
                 <Stat label="Temperature" value={`${Number(result.temperature_c ?? 0).toFixed(1)} C`} accent />
                 <Stat label="Pressure" value={`${Number(result.pressure_hpa ?? 0).toFixed(1)} hPa`} />
                 <Stat label="Humidity" value={`${Number(result.humidity_pct ?? 0).toFixed(1)}%`} />
-                {result.wind && <Stat label="Wind" value={`${Number((result.wind as Record<string, number>).speed_ms ?? 0).toFixed(1)} m/s @ ${Number((result.wind as Record<string, number>).direction_deg ?? 0).toFixed(0)} deg`} />}
+                {result.wind != null && <Stat label="Wind" value={`${Number((result.wind as Record<string, number>).speed_ms ?? 0).toFixed(1)} m/s @ ${Number((result.wind as Record<string, number>).direction_deg ?? 0).toFixed(0)} deg`} />}
                 <Stat label="Cloud Cover" value={`${Number(result.cloud_cover_pct ?? 0).toFixed(0)}%`} />
                 <Stat label="Precipitation" value={`${Number(result.precipitation_mm_h ?? 0).toFixed(2)} mm/h`} />
                 <Stat label="AQI" value={String(result.air_quality_index ?? '-')} />
